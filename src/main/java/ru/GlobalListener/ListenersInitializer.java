@@ -9,6 +9,10 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.GlobalListener.model.Keypress;
+import ru.GlobalListener.repositories.KeypressRepository;
+
+import java.util.List;
 
 /**
  * Класс инициализации листенеров
@@ -27,9 +31,13 @@ public class ListenersInitializer {
     private KeyboardListener keyboardListener;
     @Autowired
     private MouseWheelListener mouseWheelListener;
+    @Autowired
+    private KeypressRepository keypressRepository;
 
     public void initListeners() {
         disableDefaultLogger();
+        List<Keypress> keypresses = keypressRepository.findAll();
+        LOGGER.info("keypresses found {}", keypresses.size());
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException ex){
