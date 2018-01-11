@@ -61,6 +61,10 @@ public class Keypress {
         this.count = count;
     }
 
+    public void incrementCount(){
+        this.count += 1;
+    }
+
     @Override
     public String toString() {
         return "Keypress{" +

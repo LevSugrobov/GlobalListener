@@ -31,13 +31,9 @@ public class ListenersInitializer {
     private KeyboardListener keyboardListener;
     @Autowired
     private MouseWheelListener mouseWheelListener;
-    @Autowired
-    private KeypressRepository keypressRepository;
 
     public void initListeners() {
         disableDefaultLogger();
-        List<Keypress> keypresses = keypressRepository.findAll();
-        LOGGER.info("keypresses found {}", keypresses.size());
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException ex){

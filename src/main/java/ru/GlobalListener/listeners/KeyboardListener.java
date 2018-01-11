@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.GlobalListener.model.Keypress;
 import ru.GlobalListener.repositories.KeypressRepository;
+import ru.GlobalListener.services.KeyPressService;
 
 import java.util.Date;
 
@@ -26,9 +27,9 @@ public class KeyboardListener implements NativeKeyListener {
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(KeyboardListener.class);
     @Autowired
-    PressedKeysHelper pressedKeysHelper;
+    private PressedKeysHelper pressedKeysHelper;
     @Autowired
-    private KeypressRepository keypressRepository;
+    private KeyPressService keyPressService;
 
     /**
      * Конструктор по умолчанию
@@ -40,10 +41,8 @@ public class KeyboardListener implements NativeKeyListener {
      */
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
         LOGGER.info("Key Pressed: {}", NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
+        keyPressService.save(nativeKeyEvent);
         pressedKeysHelper.addPressedKey(nativeKeyEvent.getKeyCode());
-        Keypress keypress = new Keypress(new Date(), NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()), 1L);
-        keypressRepository.save(keypress);
-        LOGGER.info("{}", keypressRepository.count());
         if(pressedKeysHelper.haveExitCombination()){
             try {
                 LOGGER.info("Ctrl + C detected. Exiting...");

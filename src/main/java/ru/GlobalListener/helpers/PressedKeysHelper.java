@@ -3,7 +3,9 @@ package ru.GlobalListener.helpers;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.GlobalListener.services.KeyPressService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +38,11 @@ public class PressedKeysHelper {
     /**
      * Добавление кода нажатой клавиши
      *
-     * @param pressedKey - код
+     * @param keyCode - код
      */
-    public void addPressedKey(Integer pressedKey) {
-        LOGGER.info("adding key with code {} into pressedKeys list", pressedKey);
-        pressedKeys.add(pressedKey);
+    public void addPressedKey(Integer keyCode) {
+        LOGGER.info("adding key with code {} into pressedKeys list", keyCode);
+        pressedKeys.add(keyCode);
     }
 
     /**
