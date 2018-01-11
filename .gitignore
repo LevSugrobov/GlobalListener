@@ -1,0 +1,15 @@
+/.idea.DS_Store
+*.log
+*.log*
+.classpath
+.project
+.settings/
+target/
+*.iml
+*.swp
+faces-config.NavData
+/gkumo-connectors/gkumo-connectors-eis-nsi/nbproject/
+database.properties
+out/
+.idea/
+/.idea/
