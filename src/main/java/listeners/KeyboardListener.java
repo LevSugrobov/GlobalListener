@@ -1,24 +1,45 @@
 package listeners;
 
+import helpers.PressedKeysHelper;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Listener клавиатуры
+ * @author asugrobov
+ */
 public class KeyboardListener implements NativeKeyListener {
 
-    List<Integer> pressedKeys = new ArrayList<Integer>();
+    /**
+     * Логгер
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(KeyboardListener.class);
+    PressedKeysHelper pressedKeysHelper;
 
+    /**
+     * Конструктор по умолчанию
+     */
+    public KeyboardListener(){
+        pressedKeysHelper = new PressedKeysHelper();
+    }
+
+    /**
+     * Обработка события нажатия клавиши
+     * @param nativeKeyEvent - событие
+     */
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
-        System.out.println("Key Pressed: " + NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
-        pressedKeys.add(nativeKeyEvent.getKeyCode());
-        if((pressedKeys.contains(NativeKeyEvent.VC_CONTROL_L) || pressedKeys.contains(NativeKeyEvent.VC_CONTROL_R)) &&
-                pressedKeys.contains(NativeKeyEvent.VC_C)){
+        LOGGER.info("Key Pressed: {}", NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
+        pressedKeysHelper.addPressedKey(nativeKeyEvent.getKeyCode());
+        if(pressedKeysHelper.haveExitCombination()){
             try {
-                System.out.println("Ctrl + C detected. Exiting...");
+                LOGGER.info("Ctrl + C detected. Exiting...");
                 GlobalScreen.unregisterNativeHook();
             } catch (NativeHookException e) {
                 e.printStackTrace();
@@ -26,15 +47,16 @@ public class KeyboardListener implements NativeKeyListener {
         }
     }
 
+    /**
+     * Обработка события отжатия клавиши
+     * @param nativeKeyEvent - событие
+     */
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
-        System.out.println("Key Released: " + NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
-        Integer currentKeyCode = nativeKeyEvent.getKeyCode();
-        if(pressedKeys.contains(currentKeyCode)){
-            pressedKeys.remove(currentKeyCode);
-        }
+        LOGGER.info("Key Released: {}", NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
+        pressedKeysHelper.removeKey(nativeKeyEvent.getKeyCode());
     }
 
     public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {
-        System.out.println("Key Typed: " + NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
+        LOGGER.info("Key Typed: " + NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()));
     }
 }
