@@ -64,6 +64,8 @@ public class PressedKeysHelper {
      */
     public boolean haveExitCombination() {
         return (pressedKeys.contains(NativeKeyEvent.VC_CONTROL_L) || pressedKeys.contains(NativeKeyEvent.VC_CONTROL_R)) &&
+                (pressedKeys.contains(NativeKeyEvent.VC_ALT_L) || pressedKeys.contains(NativeKeyEvent.VC_ALT_R)) &&
+                (pressedKeys.contains(NativeKeyEvent.VC_SHIFT_L) || pressedKeys.contains(NativeKeyEvent.VC_SHIFT_R)) &&
                 pressedKeys.contains(NativeKeyEvent.VC_C);
     }
 }
