@@ -4,8 +4,11 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ru.GlobalListener.enums.MouseButtons;
+import ru.GlobalListener.services.MousePressService;
 
 /**
  * Listener мыши
@@ -18,6 +21,9 @@ public class MouseListener implements NativeMouseInputListener {
      * Логгер
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(MouseListener.class);
+
+    @Autowired
+    private MousePressService mousePressService;
 
     /**
      * Обработка события количества кликов
@@ -32,7 +38,8 @@ public class MouseListener implements NativeMouseInputListener {
      * @param nativeMouseEvent - событие
      */
     public void nativeMousePressed(NativeMouseEvent nativeMouseEvent) {
-        LOGGER.info("Mouse Pressed: {}", nativeMouseEvent.getButton());
+        LOGGER.info("Mouse Pressed: {}", MouseButtons.getButtonTitle(nativeMouseEvent.getButton()));
+        mousePressService.save(nativeMouseEvent);
     }
 
     /**
@@ -40,7 +47,7 @@ public class MouseListener implements NativeMouseInputListener {
      * @param nativeMouseEvent - событие
      */
     public void nativeMouseReleased(NativeMouseEvent nativeMouseEvent) {
-        LOGGER.info("Mouse Released: {}", nativeMouseEvent.getButton());
+        LOGGER.info("Mouse Released: {}", MouseButtons.getButtonTitle(nativeMouseEvent.getButton()));
     }
 
     /**
