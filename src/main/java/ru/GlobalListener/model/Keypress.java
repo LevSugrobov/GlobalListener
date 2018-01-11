@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="key_press")
-public class Keypress {
+public class Keypress implements IEventEntity {
     @Id
     @GeneratedValue
     @Column(name = "key_press_id")
@@ -61,8 +61,9 @@ public class Keypress {
         this.count = count;
     }
 
+    @Override
     public void incrementCount(){
-        this.count += 1;
+        this.count++;
     }
 
     @Override

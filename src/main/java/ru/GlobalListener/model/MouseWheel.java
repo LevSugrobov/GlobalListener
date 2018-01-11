@@ -4,35 +4,43 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "mouse_press")
-public class MousePress implements IEventEntity {
+@Table(name = "mouse_wheel")
+public class MouseWheel implements IEventEntity {
     @Id
     @GeneratedValue
-    @Column(name = "mouse_press_id")
+    @Column(name = "mouse_wheel_id")
     private Long id;
 
-    @Column(name = "date")
+    @Column(name="date")
     private Date date;
 
-    @Column(name = "mouse_button_title")
-    private String buttonTitle;
+    @Column(name = "direction")
+    private String direction;
 
     @Column(name = "count")
     private Long count;
 
-    public MousePress(){
+    public MouseWheel(){
 
     }
 
-    public MousePress(Date date, String buttonTitle, Long count) {
+    public MouseWheel(Date date, String direction, Long count) {
         this.date = date;
-        this.buttonTitle = buttonTitle;
+        this.direction = direction;
         this.count = count;
     }
 
     @Override
-    public void incrementCount(){
+    public void incrementCount() {
         this.count++;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getDate() {
@@ -43,12 +51,12 @@ public class MousePress implements IEventEntity {
         this.date = date;
     }
 
-    public String getButtonTitle() {
-        return buttonTitle;
+    public String getDirection() {
+        return direction;
     }
 
-    public void setButtonTitle(String buttonTitle) {
-        this.buttonTitle = buttonTitle;
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 
     public Long getCount() {
@@ -61,10 +69,10 @@ public class MousePress implements IEventEntity {
 
     @Override
     public String toString() {
-        return "MousePress{" +
+        return "MouseWheel{" +
                 "id=" + id +
                 ", date=" + date +
-                ", buttonTitle='" + buttonTitle + '\'' +
+                ", direction='" + direction + '\'' +
                 ", count=" + count +
                 '}';
     }

@@ -1,6 +1,7 @@
 package ru.GlobalListener.services;
 
 import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeInputEvent;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +19,25 @@ import java.util.Date;
  * Сервис сохранения нажатия клавиш
  */
 @Service
-public class KeyPressService {
+public class KeyPressService implements IEventService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KeyPressService.class);
 
     @Autowired
     private KeypressRepository keypressRepository;
 
-    public void save(NativeKeyEvent nativeKeyEvent) {
-        Date currentDate = DateHelper.getCurrentDate();
-        Keypress keypress = keypressRepository.findByKeyAndDate(NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()), currentDate);
-        if (keypress == null) {
-            keypress = new Keypress(currentDate, NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()), 1L);
-        } else {
-            keypress.incrementCount();
+    @Override
+    public void save(NativeInputEvent event) {
+        if(event instanceof NativeKeyEvent) {
+            NativeKeyEvent nativeKeyEvent = (NativeKeyEvent) event;
+            Date currentDate = DateHelper.getCurrentDate();
+            Keypress keypress = keypressRepository.findByKeyAndDate(NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()), currentDate);
+            if (keypress == null) {
+                keypress = new Keypress(currentDate, NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()), 1L);
+            } else {
+                keypress.incrementCount();
+            }
+            keypressRepository.save(keypress);
         }
-        keypressRepository.save(keypress);
     }
 }
