@@ -1,5 +1,6 @@
 package ru.GlobalListener.listeners;
 
+import org.springframework.context.annotation.Configuration;
 import ru.GlobalListener.enums.WheelEnum;
 import org.jnativehook.mouse.NativeMouseWheelEvent;
 import org.jnativehook.mouse.NativeMouseWheelListener;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
  * Listener колеса мыши
  * @author asugrobov
  */
+@Configuration
 public class MouseWheelListener implements NativeMouseWheelListener {
 
     /**

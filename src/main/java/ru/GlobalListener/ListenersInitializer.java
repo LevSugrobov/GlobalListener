@@ -1,5 +1,6 @@
 package ru.GlobalListener;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.GlobalListener.listeners.KeyboardListener;
 import ru.GlobalListener.listeners.MouseListener;
@@ -20,6 +21,12 @@ public class ListenersInitializer {
      * Логгер
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(ListenersInitializer.class);
+    @Autowired
+    private MouseListener mouseListener;
+    @Autowired
+    private KeyboardListener keyboardListener;
+    @Autowired
+    private MouseWheelListener mouseWheelListener;
 
     public void initListeners() {
         disableDefaultLogger();
@@ -36,11 +43,8 @@ public class ListenersInitializer {
     /**
      * Регистрация листенеров
      */
-    private static void registerListeners() {
+    private void registerListeners() {
         LOGGER.info("registering listeners...");
-        MouseListener mouseListener = new MouseListener();
-        KeyboardListener keyboardListener = new KeyboardListener();
-        MouseWheelListener mouseWheelListener = new MouseWheelListener();
         GlobalScreen.addNativeKeyListener(keyboardListener);
         GlobalScreen.addNativeMouseListener(mouseListener);
         GlobalScreen.addNativeMouseMotionListener(mouseListener);

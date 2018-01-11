@@ -1,5 +1,7 @@
 package ru.GlobalListener.listeners;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import ru.GlobalListener.helpers.PressedKeysHelper;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -12,20 +14,19 @@ import org.slf4j.LoggerFactory;
  * Listener клавиатуры
  * @author asugrobov
  */
+@Configuration
 public class KeyboardListener implements NativeKeyListener {
 
     /**
      * Логгер
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(KeyboardListener.class);
+    @Autowired
     PressedKeysHelper pressedKeysHelper;
 
     /**
      * Конструктор по умолчанию
      */
-    public KeyboardListener(){
-        pressedKeysHelper = new PressedKeysHelper();
-    }
 
     /**
      * Обработка события нажатия клавиши

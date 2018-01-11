@@ -4,11 +4,14 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Listener мыши
  * @author asugrobov
  */
+@Configuration
 public class MouseListener implements NativeMouseInputListener {
 
     /**

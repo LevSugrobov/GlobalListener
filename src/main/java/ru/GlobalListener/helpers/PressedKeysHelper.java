@@ -3,6 +3,7 @@ package ru.GlobalListener.helpers;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * Хэлпер для хранения нажатых клавиш
  * @author asugrobov
  */
+@Configuration
 public class PressedKeysHelper {
 
     /**
