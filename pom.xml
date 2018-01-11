@@ -8,7 +8,19 @@
     <artifactId>keyboard-listener</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.1.RELEASE</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+
     <dependencies>
+        <!-- spring BOOT -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <!-- зависимость для Global Listener'ов -->
         <dependency>
             <groupId>com.1stleg</groupId>

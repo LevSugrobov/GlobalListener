@@ -1,4 +1,4 @@
-package listeners;
+package ru.GlobalListener.listeners;
 
 import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;

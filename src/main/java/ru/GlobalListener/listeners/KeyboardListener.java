@@ -1,15 +1,12 @@
-package listeners;
+package ru.GlobalListener.listeners;
 
-import helpers.PressedKeysHelper;
+import ru.GlobalListener.helpers.PressedKeysHelper;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Listener клавиатуры

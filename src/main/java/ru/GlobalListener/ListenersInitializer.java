@@ -1,24 +1,27 @@
-import listeners.KeyboardListener;
-import listeners.MouseListener;
-import listeners.MouseWheelListener;
-import org.apache.log4j.LogManager;
+package ru.GlobalListener;
+
+import org.springframework.stereotype.Component;
+import ru.GlobalListener.listeners.KeyboardListener;
+import ru.GlobalListener.listeners.MouseListener;
+import ru.GlobalListener.listeners.MouseWheelListener;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Главный класс
+ * Класс инициализации листенеров
  * @author asugrobov
  */
-public class listener {
+@Component
+public class ListenersInitializer {
 
     /**
      * Логгер
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(listener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ListenersInitializer.class);
 
-    public static void main(String[] args) {
+    public void initListeners() {
         disableDefaultLogger();
         try {
             GlobalScreen.registerNativeHook();

@@ -1,4 +1,4 @@
-package enums;
+package ru.GlobalListener.enums;
 
 import java.util.HashMap;
 import java.util.Map;

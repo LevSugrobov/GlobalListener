@@ -1,6 +1,6 @@
-package listeners;
+package ru.GlobalListener.listeners;
 
-import enums.WheelEnum;
+import ru.GlobalListener.enums.WheelEnum;
 import org.jnativehook.mouse.NativeMouseWheelEvent;
 import org.jnativehook.mouse.NativeMouseWheelListener;
 import org.slf4j.Logger;

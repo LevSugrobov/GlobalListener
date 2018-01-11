@@ -1,4 +1,4 @@
-package helpers;
+package ru.GlobalListener.helpers;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.slf4j.Logger;
